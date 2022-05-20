@@ -9,7 +9,6 @@ const App: FC = () => {
   const [todoList, setTodoList] = useState<ITask[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    console.log('EventNAme', event.target.value);
     if (event.target.name === 'task') {
       setTask(event.target.value);
     } else {
@@ -54,7 +53,7 @@ const App: FC = () => {
         <button onClick={addTask}>Add Task</button>
       </div>
       <div className='todList'>
-        {todoList.map((task: ITask, key: number) => {
+        {todoList.slice(-7).map((task: ITask, key: number) => {
               if(key <= 7) {
                 return  <TodoTask key={key} task={task} completeTask={completeTask} />
             }
