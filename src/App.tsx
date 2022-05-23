@@ -11,16 +11,19 @@ const App: FC = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === 'task') {
       setTask(event.target.value);
-    } else {
+    } 
+    else {
       setDeadline(Number(event.target.value));
     }
   };
 
   const addTask = (): void => {
     const newTask = { taskName: task, deadline: deadline };
+    if(!newTask.taskName && !newTask.deadline){
+      return;
+    }
     setTodoList([...todoList, newTask]);
-    console.log(todoList);
-    setTask('Empty');
+    setTask('');
     setDeadline(0);
   };
 
@@ -37,14 +40,16 @@ const App: FC = () => {
       <div className='header'>
         <div className='inputContainer'></div>
         <input
-          defaultValue={task}
+        defaultValue={""}
+          value={task}
           type='text'
           name='task'
           placeholder='Task...'
           onChange={handleChange}
         />
         <input
-          defaultValue={deadline}
+        defaultValue={0}
+          value={deadline}
           type='number'
           name='deadline'
           placeholder='Deadline (in Days)...'
